@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :tweets,only:[:show] do
     resources :comments,only:[:create,:destroy]
   end
-  resources :likes,only[:create,:destroy]
+  resources :likes,only:[:create,:destroy]
+  resources :profiles,only:[:show,:update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
