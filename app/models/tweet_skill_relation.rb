@@ -1,0 +1,2 @@
+class TweetSkillRelation < ApplicationRecord
+end

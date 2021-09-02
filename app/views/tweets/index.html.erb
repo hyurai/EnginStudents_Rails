@@ -1,0 +1,13 @@
+<h2>EnginStudents</h2>
+<% if user_signed_in?%>
+  <a href = "/profile/<%= current_user.id%>">Mypage</a>
+  <a href = "/">投稿</a>
+  <a href = "/tweets/new">検索</a>
+  <a href = "/">いいね一覧</a>
+  <a href = "/logo"></a>
+  
+  
+<% else %>
+<a href = "/users/sign_up">サインアップ</a>
+<a href = "/users/sign_in">ログインをする</a>
+<% end %>
