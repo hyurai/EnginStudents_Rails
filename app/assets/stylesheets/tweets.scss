@@ -1,3 +1,15 @@
+.main_contents{
+    width: 100%;
+    display: flex;
+}
+
+
+.side_contents{
+    display:flex;
+    flex-flow: column;
+    width: 20%;
+}
+
 .side_content{
     color: black;
     text-decoration: none;
@@ -54,4 +66,12 @@
     position: absolute;
     top: 13px;
     right: 10px;
+}
+
+.action_contents{
+    display:flex;
+    width: 100%;
+}
+.action_content{
+    width: 33%;
 }

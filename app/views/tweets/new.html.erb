@@ -1,0 +1,38 @@
+<h2>EnginStudents</h2>
+<div class = "main_contents">
+<div class = "side_contents">
+<% if user_signed_in?%>
+  <a class = "side_content" href = "/profiles/<%= current_user.id%>">Mypage</a>
+  <a class = "side_content"href = "">投稿</a>
+  <a class = "side_content"href = "/tweets/new">検索</a>
+  <a class = "side_content"href = "/">いいね一覧</a>
+  <a class = "side_content"href = "/logo">Logo</a>
+  <a class = "js-modal-open" href = "" data-target = "modal01"></a>
+  <div id="modal01" class="c-modal js-modal">
+    <div class="c-modal_bg js-modal-close"></div>
+    <div class="c-modal_content _lg">
+    <div class="c-modal_content_inner">
+            <a class="js-modal-close c-modal_close" href=""><span>閉じる</span></a>
+            <form action = "/tweet" method = "post">
+              <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
+              <input type = "text" name = "title">
+              <input type = "text" name = "company_name" placeholer = "会社の名前">
+              <input type = "text" name = "job" placeholer = "種類">
+              <input type = "text" name= "text">
+              <input type = "date" name = "entry_date">
+              <input type = "date" name = "start_date">
+              <input type = "date" name = "end_date">
+              <input type = "submit" value = "投稿">
+            </form>
+        </div>
+    </div>
+</div>
+<% else %>
+<a href = "/users/sign_up">サインアップ</a>
+<a href = "/users/sign_in">ログインをする</a>
+<% end %>
+</div>
+<div style = "width:80%;">
+</div>
+
+</div>
