@@ -1,10 +1,11 @@
 <h2>EnginStudents</h2>
+<div style = " display:flex;flex-flow: column;">
 <% if user_signed_in?%>
-  <a href = "/profiles/<%= current_user.id%>">Mypage</a>
-  <a href = "/">投稿</a>
-  <a href = "/tweets/new">検索</a>
-  <a href = "/">いいね一覧</a>
-  <a href = "/logo"></a>
+  <a class = "side_content" href = "/profiles/<%= current_user.id%>">Mypage</a>
+  <a class = "side_content"href = "/">投稿</a>
+  <a class = "side_content"href = "/tweets/new">検索</a>
+  <a class = "side_content"href = "/">いいね一覧</a>
+  <a class = "side_content"href = "/logo">Logo</a>
   <a class = "js-modal-open" href = "/" data-target = "modal01"></a>
   <div id="modal01" class="c-modal js-modal">
     <div class="c-modal_bg js-modal-close"></div>
@@ -29,7 +30,17 @@
 <a href = "/users/sign_up">サインアップ</a>
 <a href = "/users/sign_in">ログインをする</a>
 <% end %>
+</div>
 <div>
   <% @tweets.each do |tweet|%>
+    <%= tweet.user.name%>
+    <img src = "<%= tweet.user.profile.front_img%>">
+    <%= tweet.title%>
+    <%= tweet.company_name%>
+    <%= tweet.job%>
+    <%= tweet.entry_date%>
+    <%= tweet.start_date%>
+    <%= tweet.end_date%>
+    <%= %>
   <% end %>
 </div>
