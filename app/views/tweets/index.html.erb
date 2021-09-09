@@ -1,4 +1,4 @@
-<h2>EnginStudents</h2>
+<h1>EnginStudents</h1>
 <div class = "main_contents">
 <div class = "side_contents">
 <% if user_signed_in?%>
@@ -33,6 +33,7 @@
 </div>
 <div style = "width:80%;">
   <% @tweets.each do |tweet|%>
+    <%= tweet.tweet_profile(tweet).id%>
     <div style = "border: solid;margin-right: 450px;margin-left: 100px;padding:15px;">
     <div class = "top_date" style = "display:flex;width:100%;">
       <div style = "width:10%;">
@@ -73,8 +74,8 @@
             <input type = "submit" value = "削除">
            </form>
          </div>
-         <% if @likes.where(user_id: current_user.id,tweet_id: tweet.id).first()%>
-           <form action = "/likes/<%= @likes.where(user_id: current_user.id,tweet_id: tweet.id).first().id%>" method = "post">
+         <% if current_user.liked(tweet)%>
+           <form action = "/likes/<%= current_user.liked(tweet).id %>" method = "post">
              <input type = "submit" value = "いいね取り消し">
            </form>
          <% else %>
@@ -90,5 +91,5 @@
     </div>
   <% end %>
 </div>
-
+  
 </div>
