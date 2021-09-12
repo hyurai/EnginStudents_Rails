@@ -31,9 +31,27 @@
 <% end %>
 <div>
   <%= @profile.user.name%>
-  <img src = "<%= @profile.front_img%>">
-  <img scr = "<%= @profile.back_img%>">
   <%= @profile.one_word_comment%>
   <%= @profile.url%>
-
+  <% if @profile.user.id == current_user.id%>
+    <a class = "side_content js-modal-open" href = "" data-target = "modal-profile">編集</a>
+  <% else %>
+  <% end %>
+  
+  
+   <div id="modal-profile" class="c-modal-profile js-modal-profile">
+    <div class="c-modal_bg-profile js-modal-close-profile"></div>
+    <div class="c-modal_content-profile _lg">
+        <div class="c-modal_content_inner-profile">
+            <a class="js-modal-close-profile c-modal_close-profile" href=""><span>閉じる</span></a>
+            <form action = "/profiles/<%= @profile.id%>" method = "post" enctype="multipart/form-data">
+              <input type="file" name="front_img" accept="image/*">
+              <input type="file" name="back_img" accept="image/*">
+              <input type = "text" name = "url" value = "<%= @profile.url%>">
+              <input type = "text" name = "one_word_comment" value = "<%= @profile.one_word_comment%>">
+              <input type = "submit" value = "編集">
+            </form>
+        </div>
+    </div>
+  </div>
 </div>

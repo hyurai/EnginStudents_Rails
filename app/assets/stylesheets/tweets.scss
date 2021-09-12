@@ -14,6 +14,24 @@
     color: black;
     text-decoration: none;
 }
+h2{
+    margin: 0px;
+}
+h5{
+    width: 30%;
+    background: green;
+    padding: 10px;
+    margin:0px;
+    margin-bottom:5px;
+    margin-right:5px;
+}
+a{
+    color: black;
+}
+.side_content_input{
+    width: 55%;
+    margin-bottom: 5px;
+}
 
 // モーダルウィンドウ全体のレイアウト（画面いっぱいに表示）
 .c-modal {
@@ -76,6 +94,50 @@
     width: 33%;
 }
 
+.img_areas{
+    width: 10%;
+}
+.img_size{
+    width: 50px;
+    height: 50px;
+}
+.front_img{
+    width: 100%;
+    height: 100%;
+}
+
+.tweet_contents{
+    width: 80%;
+}
+.tweet_content{
+    border: solid;
+    margin-right: 450px;
+    margin-left: 100px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+.top_date{
+    display: flex;
+    width: 100%;
+}
+.text_dates{
+    width: 100%;
+    display: flex;
+}
+.null_area{
+    width: 10%;
+}
+.text_date{
+    width: 90%;
+}
+.fas_style{
+    font-family: FontAwesome;
+    background: none;
+    border: none;
+}
+.data_areas{
+    display: flex;
+}
 
 
 

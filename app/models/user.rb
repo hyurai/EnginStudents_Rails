@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :tweets
   has_many :likes
+  has_many :profiles
 
   def liked(tweet)
     self.likes.where(tweet_id: tweet.id).first()
   end
-  
 end
