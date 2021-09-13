@@ -6,6 +6,8 @@ class TweetsController < ApplicationController
     end
     
     def new
+        @tweets = Tweet.search(params[:company_name],params[:entry_date],params[:start_date],params[:end_date])
+        @queries = {company_name: "会社名" + params[:company_name],entry_date: "エントリー日" + params[:entry_date],start_date: "就業開始日" + params[:start_date],end_date: "就業終了日" +params[:end_date]}
     end
     
     def create

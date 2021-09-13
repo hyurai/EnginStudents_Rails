@@ -1,38 +1,159 @@
-<h2>EnginStudents</h2>
+<h1>EnginStudents</h1>
 <div class = "main_contents">
-<div class = "side_contents">
-<% if user_signed_in?%>
-  <a class = "side_content" href = "/profiles/<%= current_user.id%>">Mypage</a>
-  <a class = "side_content"href = "">投稿</a>
-  <a class = "side_content"href = "/tweets/new">検索</a>
-  <a class = "side_content"href = "/">いいね一覧</a>
-  <a class = "side_content"href = "/logo">Logo</a>
-  <a class = "js-modal-open" href = "" data-target = "modal01"></a>
-  <div id="modal01" class="c-modal js-modal">
-    <div class="c-modal_bg js-modal-close"></div>
-    <div class="c-modal_content _lg">
-    <div class="c-modal_content_inner">
-            <a class="js-modal-close c-modal_close" href=""><span>閉じる</span></a>
-            <form action = "/tweet" method = "post">
+  <div class = "side_contents">
+  <% if user_signed_in?%>
+    <h2><%= link_to 'ログアウト',destroy_user_session_path,method: :delete%></h2>
+    <h2><a class = "side_content" href = "/profiles/<%= current_user.id%>">Mypage</a></h2>
+    <h2><a class = "side_content js-modal-open" href = "" data-target = "modal01">投稿</a></h2>
+    <h2><a class = "side_content"href = "/tweets/new">検索</a></h2>
+    <h2><a class = "side_content"href = "/">いいね一覧</a></h2>
+    <h2><a class = "side_content"href = "/logo">Logo</a></h2>
+    <div id="modal01" class="c-modal js-modal">
+      <div class="c-modal_bg js-modal-close"></div>
+      <div class="c-modal_content _lg">
+        <div class="c-modal_content_inner">
+          <a class="js-modal-close c-modal_close" href=""><span>閉じる</span></a>
+          <form action = "/tweets" method = "post">
+            <div style = " display: flex;flex-direction: column;">
               <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
-              <input type = "text" name = "title">
-              <input type = "text" name = "company_name" placeholer = "会社の名前">
-              <input type = "text" name = "job" placeholer = "種類">
-              <input type = "text" name= "text">
-              <input type = "date" name = "entry_date">
-              <input type = "date" name = "start_date">
-              <input type = "date" name = "end_date">
-              <input type = "submit" value = "投稿">
-            </form>
+              <div style = "display:flex;width:100%;">
+                <h5>インターンの題名</h5>
+                <input type = "text" name = "title" class = "side_content_input">
+              </div>
+              <div style = "display:flex;width: 100%;">
+                <h5>会社の名前</h5>
+                <input type = "text" name = "company_name" placeholer = "会社の名前" class = "side_content_input">
+              </div>
+              <div style = "display:flex;width: 100%;">
+                  <h5>エンジニアの種類</h5>
+                  <input type = "text" name = "job" placeholer = "種類" class = "side_content_input">
+              </div>
+              <div style = "display:flex;width: 100%;">
+                <h5>細かい情報</h5>
+                <input type = "text" name= "text" class = "side_content_input">
+              </div>
+              <div style = "display:flex;width:100%;">
+                <h5 style = "padding-right: 20px;">日程</h5>
+                <div style = "display:flex;flex-direction: column;width:70%;">
+                  <h6 style = "margin: 0px;">エントリー日</h6>
+                  <input type = "date" name = "entry_date" class = "side_content_input">
+                  <h6 style = "margin: 0px;">就業開始日</h6>
+                  <input type = "date" name = "start_date" class = "side_content_input">
+                  <h6 style = "margin: 0px;">就業最終日</h6>
+                  <input type = "date" name = "end_date" class = "side_content_input">
+                </div>
+              </div>
+              <div style = "width:100%;display:flex">
+                <div style = "width:75%;"></div>
+                <input type = "submit" value = "投稿" style = "width:13%;">
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
-</div>
-<% else %>
-<a href = "/users/sign_up">サインアップ</a>
-<a href = "/users/sign_in">ログインをする</a>
-<% end %>
-</div>
-<div style = "width:80%;">
-</div>
-
+  <% else %>
+    <h2><a class = "side_content" href = "/users/sign_up">サインアップ</a></h2>
+    <h2><a class = "side_content"href = "/users/sign_in">ログインをする</a></h2>
+  <% end %>
+  </div>
+  <div class = "tweet_contents">
+    <div>
+     <form action = "/tweets/new" method = "get">
+      <div style = "display: flex;flex-direction: column;width:100%;">
+        <div style = "display: flex;">
+          <h5 style = "width:30%;">会社名</h5>
+          <input type = "text" name = "company_name" style = "width: 55%;margin-bottom: 5px;">
+        </div>
+        <div style = "display: flex;">
+        <h5 style = "width:30%;">日程</h5>
+        <div style = "display: flex;flex-direction: column;">
+          <p style = "margin: 0px;">エントリー日</p>
+          <input type = "date" name = "entry_date">
+          <p style = "margin: 0px;">就業開始日</p>
+          <input type = "date" name = "start_date">
+          <p style = "margin: 0px;">就業終了日</p>
+          <input type = "date" name = "end_date">
+        </div>
+      </div>
+      <div style = "width:100%;display:flex">
+        <div style = "width:75%;"></div>
+        <input type = "submit" value = "検索" style = "width:13%;">
+      </div>
+      </div>
+     </form>
+    <div>
+      <% @queries.each do |querye|%>
+        <% if querye[1]%>
+          <%= querye[1]%>
+        <% end %>
+      <% end %>
+    </div>
+    </div>
+    <% @tweets.each do |tweet|%>
+      <div class = "tweet_content">
+        <div class = "top_date">
+          <div class = "img_areas">
+            <div class = "img_size">
+              <img class = "front_img"src = "<%= tweet.tweet_profile(tweet).front_img%>">
+            </div>
+          </div>
+          <p><%= tweet.user.name%></p>
+        </div>
+        <div class = "text_dates">
+          <div class = "null_area">
+          </div>
+          <div class = "text_date">
+          <h2><%= tweet.title%></h2>
+          <%= tweet.company_name%>
+          <%= tweet.job%>
+          <div class = "data_areas">
+            <div>
+              <p>エントリー</p>
+              <%= tweet.entry_date%>
+            </div>
+            <div>
+              <p>開始</p>
+              <%= tweet.start_date%>
+            </div>
+            <div>
+              <p>終わり</p>
+              <%= tweet.end_date%>
+            </div>
+         </div>
+         <%= tweet.text%>
+         <% if user_signed_in? %>
+           <div class = "action_contents">
+             <div class = "action_content">
+               <a href = "/tweets/<%= tweet.id%>"><i class="fas fa-comments"></i></a>
+             </div>
+             <% if current_user.id == tweet.user.id%>
+               <div class = "action_content">
+                 <form action = "/tweet/<%= tweet.id%>" method = "post">
+                  <input type = "submit" value = "&#xf1f8;" class = "fas_style">
+                 </form>
+               </div>
+             <% else %>
+             <% end %>
+             <% if current_user.liked(tweet)%>
+               <form action = "/likes/<%= current_user.liked(tweet).id %>" method = "post">
+                 <input type="hidden" name="_method" value="DELETE">
+                 <input type = "submit" value = "&#xf004;" class = "fas_style" style = "color: red;">
+               </form>
+             <% else %>
+               <form action = "/likes" method = "post">
+                 <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
+                 <input type = "hidden" name = "tweet_id" value = "<%= tweet.id%>">
+                 <input type = "submit" value = "&#xf004;" class = "fas_style">
+               </form>
+             <% end %>
+          </div>
+        <% else %>
+          <p>ログインをすると見ることが出来ます</p>
+        <% end %>
+        </div>
+      </div>
+      </div>
+    <% end %>
+  </div>
 </div>
