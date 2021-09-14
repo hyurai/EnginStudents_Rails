@@ -6,7 +6,7 @@
     <h2><a class = "side_content" href = "/profiles/<%= current_user.id%>">Mypage</a></h2>
     <h2><a class = "side_content js-modal-open" href = "" data-target = "modal01">投稿</a></h2>
     <h2><a class = "side_content"href = "/tweets/new">検索</a></h2>
-    <h2><a class = "side_content"href = "/users/<%= current_user.id%>/likes">いいね一覧</a></h2>
+    <h2><a class = "side_content"href = "/">いいね一覧</a></h2>
     <h2><a class = "side_content"href = "/logo">Logo</a></h2>
     <div id="modal01" class="c-modal js-modal">
       <div class="c-modal_bg js-modal-close"></div>
@@ -58,58 +58,58 @@
   <% end %>
   </div>
   <div class = "tweet_contents">
-    <% @tweets.each do |tweet|%>
+    <% @likes.each do |like|%>
       <div class = "tweet_content">
         <div class = "top_date">
           <div class = "img_areas">
             <div class = "img_size">
-              <img class = "front_img"src = "<%= tweet.tweet_profile(tweet).front_img%>">
+              <img class = "front_img"src = "<%= like.tweet_profile(like).front_img%>">
             </div>
           </div>
-          <p><%= tweet.user.name%></p>
+          <p><%= like.user.name%></p>
         </div>
         <div class = "text_dates">
           <div class = "null_area">
           </div>
           <div class = "text_date">
-          <h2><%= tweet.title%></h2>
-          <%= tweet.company_name%>
-          <%= tweet.job%>
+          <h2><%= like.title%></h2>
+          <%= like.company_name%>
+          <%= like.job%>
           <div class = "data_areas">
             <div>
               <p>エントリー</p>
-              <%= tweet.entry_date%>
+              <%= like.entry_date%>
             </div>
             <div>
               <p>開始</p>
-              <%= tweet.start_date%>
+              <%= like.start_date%>
             </div>
             <div>
               <p>終わり</p>
-              <%= tweet.end_date%>
+              <%= like.end_date%>
             </div>
          </div>
-         <%= tweet.text%>
+         <%= like.text%>
          <% if user_signed_in? %>
            <div class = "action_contents">
              <div class = "action_content">
-               <a href = "/tweets/<%= tweet.id%>"><i class="fas fa-comments"></i></a>
+               <a href = "/tweets/<%= like.id%>"><i class="fas fa-comments"></i></a>
              </div>
-             <% if current_user.id == tweet.user.id%>
+             <% if current_user.id == like.user.id%>
                <div class = "action_content">
-                 <form action = "/tweet/<%= tweet.id%>" method = "post">
+                 <form action = "/tweet/<%= like.id%>" method = "post">
                   <input type = "submit" value = "&#xf1f8;" class = "fas_style">
                  </form>
                </div>
              <% else %>
              <% end %>
-             <% if current_user.liked(tweet)%>
-               <form action = "/users/<%= current_user.id%>/likes/<%= current_user.liked(tweet).id %>" method = "post">
+             <% if current_user.liked(like)%>
+               <form action = "/users/<%= current_user.id%>/likes/<%= current_user.liked(like).id %>" method = "post">
                  <input type="hidden" name="_method" value="DELETE">
                  <input type = "submit" value = "&#xf004;" class = "fas_style" style = "color: red;">
                </form>
              <% else %>
-               <form action = "/users/<%= current_user.id%>/likes" method = "post">
+               <form action = "/likes" method = "post">
                  <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
                  <input type = "hidden" name = "tweet_id" value = "<%= tweet.id%>">
                  <input type = "submit" value = "&#xf004;" class = "fas_style">
