@@ -58,30 +58,46 @@
   <% end %>
   </div>
   <div class = "tweet_contents">
-    <div>
-     <form action = "/tweets/new" method = "get">
-      <div style = "display: flex;flex-direction: column;width:100%;">
-        <div style = "display: flex;">
-          <h5 style = "width:30%;">会社名</h5>
-          <input type = "text" name = "company_name" style = "width: 55%;margin-bottom: 5px;">
-        </div>
-        <div style = "display: flex;">
-        <h5 style = "width:30%;">日程</h5>
-        <div style = "display: flex;flex-direction: column;">
-          <p style = "margin: 0px;">エントリー日</p>
-          <input type = "date" name = "entry_date">
-          <p style = "margin: 0px;">就業開始日</p>
-          <input type = "date" name = "start_date">
-          <p style = "margin: 0px;">就業終了日</p>
-          <input type = "date" name = "end_date">
-        </div>
+    <div style = "display:flex;width:100%;">
+      <div style = "width:50%;">
+        <h2>会社名で検索</h2>
+        <form action = "/tweets/new" method = "get">
+          <div style = "display: flex;flex-direction: column;width:100%;">
+            <div style = "display: flex;">
+             <h5 style = "width:30%;">会社名</h5>
+             <input type = "text" name = "company_name" style = "width: 55%;margin-bottom: 5px;">
+            </div>
+            <div style = "width:100%;display:flex">
+              <div style = "width:75%;"></div>
+              <input type = "submit" value = "検索" style = "width:13%;">
+            </div>
+          </div>
+        </form>
       </div>
-      <div style = "width:100%;display:flex">
-        <div style = "width:75%;"></div>
-        <input type = "submit" value = "検索" style = "width:13%;">
+      <div style = "width:50%;">
+        <h2>日程で検索</h2>
+        <form action = "/tweets/new" method = "get">
+          <div style = "display:flex;flex-direction: column;">
+            <div style = "display: flex;">
+              <h5 style = "width:30%;">日程</h5>
+              <div style = "display: flex;flex-direction: column;">
+                <p style = "margin: 0px;">エントリー日</p>
+                <input type = "date" name = "entry_date">
+                <p style = "margin: 0px;">就業開始日</p>
+                <input type = "date" name = "start_date">
+                <p style = "margin: 0px;">就業終了日</p>
+                <input type = "date" name = "end_date" style = "margin-bottom:5px;">
+              </div>
+            </div>
+            <div style = "width:100%;display:flex;">
+              <div style = "width:70%;"></div>
+              <div style = "width:30%;">
+                <input type = "submit" value = "検索">
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-      </div>
-     </form>
     <div>
      
     </div>
