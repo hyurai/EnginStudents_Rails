@@ -4,11 +4,106 @@
   <% if user_signed_in?%>
     <h2><%= link_to 'ログアウト',destroy_user_session_path,method: :delete%></h2>
     <h2><a class = "side_content" href = "/profiles/<%= current_user.id%>">Mypage</a></h2>
-    <h2><a class = "side_content js-modal-open" href = "" data-target = "modal01">投稿</a></h2>
+    <% if current_user.id == 1%>
+      <h2><a class = "side_content js-modal-open" href = "" data-target = "modal01">インターン投稿</a></h2>
+    <% end %>
+    <h2><a class = "side_content js-modal-open" href = "" data-target = "modal-tweet">投稿</a></h2>
     <h2><a class = "side_content"href = "/tweets/new">検索</a></h2>
     <h2><a class = "side_content"href = "/users/<%= current_user.id%>/likes">いいね一覧</a></h2>
     <h2><a class = "side_content"href = "/logo">Logo</a></h2>
-    <div id="modal01" class="c-modal js-modal">
+  <% else %>
+    <h2><a class = "side_content" href = "/users/sign_up">サインアップ</a></h2>
+    <h2><a class = "side_content"href = "/users/sign_in">ログインをする</a></h2>
+  <% end %>
+  </div>
+  <div class = "tweet_contents">
+    <% @tweets.each do |tweet|%>
+      <div class = "tweet_content">
+        <div class = "top_date">
+          <div class = "img_areas">
+            <div class = "img_size">
+              <img class = "front_img"src = "<%= tweet.tweet_profile(tweet).front_img%>">
+            </div>
+          </div>
+          <p><%= tweet.user.name%></p>
+        </div>
+        <div class = "text_dates">
+          <div class = "null_area">
+          </div>
+          <div class = "text_date">
+          <h2><%= tweet.title%></h2>
+          <%= tweet.company_name%>
+          <%= tweet.job%>
+          <% if tweet.job?%>
+            <div class = "data_areas">
+              <div>
+                <p>エントリー</p>
+                <%= tweet.entry_date%>
+              </div>
+              <div>
+                <p>開始</p>
+                <%= tweet.start_date%>
+              </div>
+              <div>
+                <p>終わり</p>
+                <%= tweet.end_date%>
+              </div>
+           </div>
+         <% end %>
+         <%= tweet.text%>
+         <% if user_signed_in? %>
+           <div class = "action_contents">
+             <div class = "action_content">
+               <a href = "/tweets/<%= tweet.id%>"><i class="fas fa-comments"></i></a>
+             </div>
+             <% if current_user.id == tweet.user.id%>
+               <div class = "action_content">
+                 <form action = "/tweet/<%= tweet.id%>" method = "post">
+                  <input type = "submit" value = "&#xf1f8;" class = "fas_style">
+                 </form>
+               </div>
+             <% else %>
+             <% end %>
+             <% if current_user.liked(tweet)%>
+               <form action = "/users/<%= current_user.id%>/likes/<%= current_user.liked(tweet).id %>" method = "post">
+                 <input type="hidden" name="_method" value="DELETE">
+                 <input type = "submit" value = "&#xf004;" class = "fas_style" style = "color: red;">
+               </form>
+             <% else %>
+               <form action = "/users/<%= current_user.id%>/likes" method = "post">
+                 <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
+                 <input type = "hidden" name = "tweet_id" value = "<%= tweet.id%>">
+                 <input type = "submit" value = "&#xf004;" class = "fas_style">
+               </form>
+             <% end %>
+          </div>
+        <% else %>
+          <p>ログインをすると見ることが出来ます</p>
+        <% end %>
+        </div>
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+ <div id = "modal-tweet" class = "c-modal-tweet js-modal-tweet">
+  <div class = "c-modal_bg-tweet js-modal-close-tweet"></div>
+  <div class = "c-modal_content-tweet _lg-tweet">
+    <div class = "c-modal_content_inner-tweet">
+      <a class = "js-modal-close-tweet c-modal_close-tweet" href = ""><span>閉じる</span></a>
+      <form action = "/tweets" method = "post">
+        <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
+        <input type = "text" name = "text">
+        <input type = "submit" value = "投稿">
+      </form>
+    </div>
+  </div>
+  
+  
+ </div>
+ <div id="modal01" class="c-modal js-modal">
       <div class="c-modal_bg js-modal-close"></div>
       <div class="c-modal_content _lg">
         <div class="c-modal_content_inner">
@@ -52,76 +147,3 @@
         </div>
       </div>
     </div>
-  <% else %>
-    <h2><a class = "side_content" href = "/users/sign_up">サインアップ</a></h2>
-    <h2><a class = "side_content"href = "/users/sign_in">ログインをする</a></h2>
-  <% end %>
-  </div>
-  <div class = "tweet_contents">
-    <% @tweets.each do |tweet|%>
-      <div class = "tweet_content">
-        <div class = "top_date">
-          <div class = "img_areas">
-            <div class = "img_size">
-              <img class = "front_img"src = "<%= tweet.tweet_profile(tweet).front_img%>">
-            </div>
-          </div>
-          <p><%= tweet.user.name%></p>
-        </div>
-        <div class = "text_dates">
-          <div class = "null_area">
-          </div>
-          <div class = "text_date">
-          <h2><%= tweet.title%></h2>
-          <%= tweet.company_name%>
-          <%= tweet.job%>
-          <div class = "data_areas">
-            <div>
-              <p>エントリー</p>
-              <%= tweet.entry_date%>
-            </div>
-            <div>
-              <p>開始</p>
-              <%= tweet.start_date%>
-            </div>
-            <div>
-              <p>終わり</p>
-              <%= tweet.end_date%>
-            </div>
-         </div>
-         <%= tweet.text%>
-         <% if user_signed_in? %>
-           <div class = "action_contents">
-             <div class = "action_content">
-               <a href = "/tweets/<%= tweet.id%>"><i class="fas fa-comments"></i></a>
-             </div>
-             <% if current_user.id == tweet.user.id%>
-               <div class = "action_content">
-                 <form action = "/tweet/<%= tweet.id%>" method = "post">
-                  <input type = "submit" value = "&#xf1f8;" class = "fas_style">
-                 </form>
-               </div>
-             <% else %>
-             <% end %>
-             <% if current_user.liked(tweet)%>
-               <form action = "/users/<%= current_user.id%>/likes/<%= current_user.liked(tweet).id %>" method = "post">
-                 <input type="hidden" name="_method" value="DELETE">
-                 <input type = "submit" value = "&#xf004;" class = "fas_style" style = "color: red;">
-               </form>
-             <% else %>
-               <form action = "/users/<%= current_user.id%>/likes" method = "post">
-                 <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
-                 <input type = "hidden" name = "tweet_id" value = "<%= tweet.id%>">
-                 <input type = "submit" value = "&#xf004;" class = "fas_style">
-               </form>
-             <% end %>
-          </div>
-        <% else %>
-          <p>ログインをすると見ることが出来ます</p>
-        <% end %>
-        </div>
-      </div>
-      </div>
-    <% end %>
-  </div>
-</div>

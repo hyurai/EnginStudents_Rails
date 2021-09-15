@@ -12,10 +12,10 @@ class Tweet < ApplicationRecord
     def self.search(company_name,entry_date,start_date,end_date)
         if (company_name != nil)
             self.where('company_name Like ?',"%#{company_name}%")
+        elsif(start_date.present?)
+            self.where('start_date >= ?',"#{start_date}")
         elsif(entry_date != nil)
             self.where('entry_date >= ?',"#{entry_date}")
-        elsif(start_date != nil)
-            self.where('start_date >= ?',"#{start_date}")
         elsif(end_date != nil)
             self.where('end_date <= ?',"#{end_date}")
         elsif(start_date != nil && end_date != nil)
@@ -23,6 +23,10 @@ class Tweet < ApplicationRecord
         else
             self.all
         end
+    end
+    
+    def self.ssearch(e)
+         self.where('start_date >= ?',"#{e}")
     end
    
 end
