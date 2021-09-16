@@ -1,20 +1,28 @@
-<h1>EnginStudents</h1>
+<div style = "width:100%;display:flex;">
+  <div style = "width:7.5%;"></div>
+  <h2>EnginStudents</h2>
+</div>
 <div class = "main_contents">
   <div class = "side_contents">
+    <div style = "width:100%;display:flex;">
+    <div style = "width:30%;"></div>
+    <div style = "display:flex;flex-direction: column;">
   <% if user_signed_in?%>
-    <h2><%= link_to 'ログアウト',destroy_user_session_path,method: :delete%></h2>
-    <h2><a class = "side_content" href = "/profiles/<%= current_user.id%>">Mypage</a></h2>
+    <h3><%= link_to 'ログアウト',destroy_user_session_path,method: :delete%></h3>
+    <h3><a class = "side_content" href = "/profiles/<%= current_user.id%>">Mypage</a></h3>
     <% if current_user.id == 1%>
-      <h2><a class = "side_content js-modal-open" href = "" data-target = "modal01">インターン投稿</a></h2>
+      <h3><a class = "side_content js-modal-open" href = "" data-target = "modal01">インターン投稿</a></h3>
     <% end %>
-    <h2><a class = "side_content js-modal-open" href = "" data-target = "modal-tweet">投稿</a></h2>
-    <h2><a class = "side_content"href = "/tweets/new">検索</a></h2>
-    <h2><a class = "side_content"href = "/users/<%= current_user.id%>/likes">いいね一覧</a></h2>
-    <h2><a class = "side_content"href = "/logo">Logo</a></h2>
+    <h3><a class = "side_content js-modal-open" href = "" data-target = "modal-tweet">投稿</a></h3>
+    <h3><a class = "side_content"href = "/tweets/new">検索</a></h3>
+    <h3><a class = "side_content"href = "/users/<%= current_user.id%>/likes">いいね一覧</a></h3>
+    <h3><a class = "side_content"href = "/">近日実装</a></h3>
   <% else %>
-    <h2><a class = "side_content" href = "/users/sign_up">サインアップ</a></h2>
-    <h2><a class = "side_content"href = "/users/sign_in">ログインをする</a></h2>
+    <h3><a class = "side_content" href = "/users/sign_up">サインアップ</a></h3>
+    <h3><a class = "side_content"href = "/users/sign_in">ログインをする</a></h3>
   <% end %>
+    </div>
+   </div>
   </div>
   <div class = "tweet_contents">
     <% @tweets.each do |tweet|%>
@@ -58,7 +66,8 @@
              </div>
              <% if current_user.id == tweet.user.id%>
                <div class = "action_content">
-                 <form action = "/tweet/<%= tweet.id%>" method = "post">
+                 <form action = "/tweets/<%= tweet.id%>" method = "POST">
+                  <input type="hidden" name="_method" value="DELETE">
                   <input type = "submit" value = "&#xf1f8;" class = "fas_style">
                  </form>
                </div>
@@ -87,7 +96,7 @@
   </div>
 </div>
 
-
+<% if user_signed_in?%>
  <div id = "modal-tweet" class = "c-modal-tweet js-modal-tweet">
   <div class = "c-modal_bg-tweet js-modal-close-tweet"></div>
   <div class = "c-modal_content-tweet _lg-tweet">
@@ -147,3 +156,4 @@
         </div>
       </div>
     </div>
+  <% end %>

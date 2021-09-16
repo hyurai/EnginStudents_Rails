@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
    registrations: 'users/registrations'
   }
-  root to: 'tweets#index'
+  root to: 'tweets#top'
   resources :users,only:[:show] do
     resources :likes,only:[:index,:create,:destroy]
   end
