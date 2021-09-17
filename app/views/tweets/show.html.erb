@@ -65,22 +65,24 @@
          <%= @tweet.text%>
          <div class = "action_contents">
            <div class = "action_content">
-            <a class = "side_content js-modal-open-comment" href = "" data-target = "modal-comment">コメント</a>
+            <a class = "side_content js-modal-open-comment" href = "" data-target = "modal-comment"><i class="fas fa-comments"></i></a>
            </div>
-           <div class = "action_content">
-             <form action = "/tweet/<%= @tweet.id%>" method = "post">
-              <input type = "submit" value = "削除">
-             </form>
-           </div>
+           <% if current_user.id == @tweet.user_id%>
+             <div class = "action_content">
+               <form action = "/tweet/<%= @tweet.id%>" method = "post">
+                <input type = "submit" value = "&#xf1f8;" class = "fas_style">
+               </form>
+             </div>
+           <% end %>
            <% if current_user.liked(@tweet)%>
              <form action = "/likes/<%= current_user.liked(@tweet).id%>" method = "post">
-               <input type = "submit" value = "いいね取り消し">
+               <input type = "submit" value = "&#xf004;" class = "fas_style" style = "color: red;">
              </form>
            <% else %>
-             <form action = "/likes" method = "post">
+             <form action = "/users/<%= current_user.id%>/likes" method = "post">
                <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
                <input type = "hidden" name = "tweet_id" value = "<%= @tweet.id%>">
-               <input type = "submit" value = "いいね">
+               <input type = "submit" value = "&#xf004;" class = "fas_style">
              </form>
            <% end %>
          </div>
