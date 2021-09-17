@@ -6,20 +6,38 @@
   <div class = "side_contents">
     <div style = "width:100%;display:flex;">
     <div style = "width:30%;"></div>
-    <div style = "display:flex;flex-direction: column;">
+    <div style = "display:flex;flex-direction: column;width:70%;">
   <% if user_signed_in?%>
-    <h3><i class="fas fa-sign-out-alt"></i><%= link_to 'ログアウト',destroy_user_session_path,method: :delete%></h3>
-    <h3><a class = "side_content" href = "/profiles/<%= current_user.id%>"><i class="far fa-id-card"></i>Mypage</a></h3>
+    <div style = "width:100%;">
+      <h3><i class="fas fa-sign-out-alt" style = "width:15%;"></i><%= link_to 'ログアウト',destroy_user_session_path,method: :delete%></h3>
+    </div>
+    <div style = "width:100%;">
+      <h3><a class = "side_content" href = "/profiles/<%= current_user.id%>"><i class="far fa-id-card" style = width:15%;></i>Mypage</a></h3>
+    </div>
     <% if current_user.id == 1%>
-      <h3><a class = "side_content js-modal-open" href = "" data-target = "modal01"><i class="fas fa-paper-plane"></i>インターン投稿</a></h3>
+      <div style = "width:100%;">
+        <h3><a class = "side_content js-modal-open" href = "" data-target = "modal01"><i class="fas fa-paper-plane" style = "width:15%;"></i>インターン投稿</a></h3>
+      </div>
     <% end %>
-    <h3><a class = "side_content js-modal-open" href = "" data-target = "modal-tweet"><i class="fas fa-paper-plane"></i>投稿</a></h3>
-    <h3><a class = "side_content"href = "/tweets/new"><i class="fas fa-search"></i>検索</a></h3>
-    <h3><a class = "side_content"href = "/users/<%= current_user.id%>/likes"><i class="fas fa-thumbs-up"></i>いいね一覧</a></h3>
-    <h3><a class = "side_content"href = "/"><i class="fas fa-lock"></i>近日実装</a></h3>
+    <div style = "width:100%;">
+      <h3><a class = "side_content js-modal-open" href = "" data-target = "modal-tweet"><i class="fas fa-paper-plane" style = "width:15%;"></i>投稿</a></h3>
+    </div>
+    <div style = "width:100%;">
+      <h3><a class = "side_content"href = "/tweets/new"><i class="fas fa-search" style = "width:15%;"></i>検索</a></h3>
+    </div>
+    <div style = "width:100%;">
+      <h3><a class = "side_content"href = "/users/<%= current_user.id%>/likes"><i class="fas fa-thumbs-up" style = "width:15%;"></i>いいね一覧</a></h3>
+    </div>
+    <div style = "width:100%;">
+      <h3><a class = "side_content"href = "/"><i class="fas fa-lock" style = "width:15%;"></i>近日実装</a></h3>
+    </div>
   <% else %>
-    <h3><a class = "side_content" href = "/users/sign_up">サインアップ</a></h3>
-    <h3><a class = "side_content"href = "/users/sign_in">ログインをする</a></h3>
+    <div style = "width:100%;">
+      <h3><a class = "side_content" href = "/users/sign_up"><i class="fas fa-user-plus" style = "width:15%;"></i>サインアップ</a></h3>
+    </div>
+    <div style = "width:100%;">
+      <h3><a class = "side_content"href = "/users/sign_in"><i class="fas fa-sign-in-alt" style = "width:15%;"></i>ログインをする</a></h3>
+    </div>
   <% end %>
     </div>
    </div>
