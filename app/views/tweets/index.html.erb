@@ -51,7 +51,7 @@
               <img class = "front_img"src = "<%= tweet.tweet_profile(tweet).front_img%>">
             </div>
           </div>
-          <p><%= tweet.user.name%></p>
+          <p><a href = "/profiles/<%= tweet.tweet_profile(tweet).user_id%>"><%= tweet.user.name%></a></p>
         </div>
         <div class = "text_dates">
           <div class = "null_area">
