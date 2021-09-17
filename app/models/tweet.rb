@@ -7,26 +7,20 @@ class Tweet < ApplicationRecord
         Profile.where(user_id: tweet.user.id).first()
     end
     
-    
-    
     def self.search(company_name,entry_date,start_date,end_date)
-        if (company_name != nil)
+        if (company_name.present?)
             self.where('company_name Like ?',"%#{company_name}%")
+        elsif(entry_date.present?)
+            self.where('entry_date >= ?',"#{entry_date}")
         elsif(start_date.present?)
             self.where('start_date >= ?',"#{start_date}")
-        elsif(entry_date != nil)
-            self.where('entry_date >= ?',"#{entry_date}")
-        elsif(end_date != nil)
+        elsif(end_date.present?)
             self.where('end_date <= ?',"#{end_date}")
-        elsif(start_date != nil && end_date != nil)
-            self.where('start_date <= ?',"#{start_date}").where('end_date >= ?',"#{end_date}")
+        elsif(start_date.present? && end_date.present?)
+            self.where('start_date <= ?',"#{start_date}")
+                .where('end_date >= ?',"#{end_date}")
         else
             self.all
         end
     end
-    
-    def self.ssearch(e)
-         self.where('start_date >= ?',"#{e}")
-    end
-   
 end
