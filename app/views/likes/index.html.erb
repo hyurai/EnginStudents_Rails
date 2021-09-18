@@ -1,61 +1,46 @@
-<h1>EnginStudents</h1>
+<div style = "width:100%;display:flex;">
+  <div style = "width:7.5%;"></div>
+  <h2>EnginStudents</h2>
+</div>
 <div class = "main_contents">
-  <div class = "side_contents">
-  <% if user_signed_in?%>
-    <h2><%= link_to 'ログアウト',destroy_user_session_path,method: :delete%></h2>
-    <h2><a class = "side_content" href = "/profiles/<%= current_user.id%>">Mypage</a></h2>
-    <h2><a class = "side_content js-modal-open" href = "" data-target = "modal01">投稿</a></h2>
-    <h2><a class = "side_content"href = "/tweets/new">検索</a></h2>
-    <h2><a class = "side_content"href = "/">いいね一覧</a></h2>
-    <h2><a class = "side_content"href = "/logo">Logo</a></h2>
-    <div id="modal01" class="c-modal js-modal">
-      <div class="c-modal_bg js-modal-close"></div>
-      <div class="c-modal_content _lg">
-        <div class="c-modal_content_inner">
-          <a class="js-modal-close c-modal_close" href=""><span>閉じる</span></a>
-          <form action = "/tweets" method = "post">
-            <div style = " display: flex;flex-direction: column;">
-              <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
-              <div style = "display:flex;width:100%;">
-                <h5>インターンの題名</h5>
-                <input type = "text" name = "title" class = "side_content_input">
-              </div>
-              <div style = "display:flex;width: 100%;">
-                <h5>会社の名前</h5>
-                <input type = "text" name = "company_name" placeholer = "会社の名前" class = "side_content_input">
-              </div>
-              <div style = "display:flex;width: 100%;">
-                  <h5>エンジニアの種類</h5>
-                  <input type = "text" name = "job" placeholer = "種類" class = "side_content_input">
-              </div>
-              <div style = "display:flex;width: 100%;">
-                <h5>細かい情報</h5>
-                <input type = "text" name= "text" class = "side_content_input">
-              </div>
-              <div style = "display:flex;width:100%;">
-                <h5 style = "padding-right: 20px;">日程</h5>
-                <div style = "display:flex;flex-direction: column;width:70%;">
-                  <h6 style = "margin: 0px;">エントリー日</h6>
-                  <input type = "date" name = "entry_date" class = "side_content_input">
-                  <h6 style = "margin: 0px;">就業開始日</h6>
-                  <input type = "date" name = "start_date" class = "side_content_input">
-                  <h6 style = "margin: 0px;">就業最終日</h6>
-                  <input type = "date" name = "end_date" class = "side_content_input">
-                </div>
-              </div>
-              <div style = "width:100%;display:flex">
-                <div style = "width:75%;"></div>
-                <input type = "submit" value = "投稿" style = "width:13%;">
-              </div>
+   <div class = "side_contents">
+    <div style = "width:100%;display:flex;">
+      <div style = "width:30%;"></div>
+      <div style = "display:flex;flex-direction: column;width:70%;">
+        <% if user_signed_in?%>
+          <div style = "width:100%;">
+            <h3><i class="fas fa-sign-out-alt" style = "width:15%;"></i><%= link_to 'ログアウト',destroy_user_session_path,method: :delete%></h3>
+          </div>
+          <div style = "width:100%;">
+            <h3><a class = "side_content" href = "/profiles/<%= current_user.id%>"><i class="far fa-id-card" style = width:15%;></i>Mypage</a></h3>
+          </div>
+          <% if current_user.id == 1%>
+            <div style = "width:100%;">
+              <h3><a class = "side_content js-modal-open" href = "" data-target = "modal01"><i class="fas fa-paper-plane" style = "width:15%;"></i>インターン投稿</a></h3>
             </div>
-          </form>
-        </div>
+          <% end %>
+            <div style = "width:100%;">
+              <h3><a class = "side_content js-modal-open" href = "" data-target = "modal-tweet"><i class="fas fa-paper-plane" style = "width:15%;"></i>投稿</a></h3>
+            </div>
+            <div style = "width:100%;">
+              <h3><a class = "side_content"href = "/tweets/new"><i class="fas fa-search" style = "width:15%;"></i>検索</a></h3>
+            </div>
+            <div style = "width:100%;">
+              <h3><a class = "side_content"href = "/users/<%= current_user.id%>/likes"><i class="fas fa-thumbs-up" style = "width:15%;"></i>いいね一覧</a></h3>
+            </div>
+            <div style = "width:100%;">
+              <h3><a class = "side_content"href = "/"><i class="fas fa-lock" style = "width:15%;"></i>近日実装</a></h3>
+            </div>
+        <% else %>
+            <div style = "width:100%;">
+              <h3><a class = "side_content" href = "/users/sign_up"><i class="fas fa-user-plus" style = "width:15%;"></i>サインアップ</a></h3>
+            </div>
+            <div style = "width:100%;">
+              <h3><a class = "side_content"href = "/users/sign_in"><i class="fas fa-sign-in-alt" style = "width:15%;"></i>ログインをする</a></h3>
+            </div>
+        <% end %>
       </div>
-    </div>
-  <% else %>
-    <h2><a class = "side_content" href = "/users/sign_up">サインアップ</a></h2>
-    <h2><a class = "side_content"href = "/users/sign_in">ログインをする</a></h2>
-  <% end %>
+   </div>
   </div>
   <div class = "tweet_contents">
     <% @likes.each do |like|%>
@@ -125,3 +110,83 @@
     <% end %>
   </div>
 </div>
+
+
+<% if user_signed_in?%>
+ <div id = "modal-tweet" class = "c-modal-tweet js-modal-tweet">
+  <div class = "c-modal_bg-tweet js-modal-close-tweet"></div>
+  <div class = "c-modal_content-tweet _lg-tweet">
+    <div class = "c-modal_content_inner-tweet" style = "display:flex;flex-direction: column;">
+      <div class = "tweet_create_content"style = "height:100%;">
+        <div style = "height:10%;">
+          <a class = "js-modal-close-tweet c-modal_close-tweet" href = "" style = "font-size:30px;"><span>×</span></a>
+        </div>
+        <form action = "/tweets" method = "post">
+          <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
+            <div style = "display:flex;flex-direction: column;">
+              <textarea name = "text" cols = "70" rows="5" id = "input_text"></textarea>
+              <input type = "submit" value = "投稿" style = "margin:10px 0px 10px 400px;" id = "button" disabled>   
+            </div>
+        </form>  
+      </div>
+    </div>
+  </div>
+
+  
+ </div>
+ <div id="modal01" class="c-modal js-modal">
+      <div class="c-modal_bg js-modal-close"></div>
+      <div class="c-modal_content _lg">
+        <div class="c-modal_content_inner">
+          <a class="js-modal-close c-modal_close" href=""><span>閉じる</span></a>
+          <form action = "/tweets" method = "post">
+            <div style = " display: flex;flex-direction: column;">
+              <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
+              <div style = "display:flex;width:100%;">
+                <h5>インターンの題名</h5>
+                <input type = "text" name = "title" class = "side_content_input">
+              </div>
+              <div style = "display:flex;width: 100%;">
+                <h5>会社の名前</h5>
+                <input type = "text" name = "company_name" placeholer = "会社の名前" class = "side_content_input">
+              </div>
+              <div style = "display:flex;width: 100%;">
+                  <h5>エンジニアの種類</h5>
+                  <input type = "text" name = "job" placeholer = "種類" class = "side_content_input">
+              </div>
+              <div style = "display:flex;width: 100%;">
+                <h5>細かい情報</h5>
+                <input type = "text" name= "text" class = "side_content_input">
+              </div>
+              <div style = "display:flex;width:100%;">
+                <h5 style = "padding-right: 20px;">日程</h5>
+                <div style = "display:flex;flex-direction: column;width:70%;">
+                  <h6 style = "margin: 0px;">エントリー日</h6>
+                  <input type = "date" name = "entry_date" class = "side_content_input">
+                  <h6 style = "margin: 0px;">就業開始日</h6>
+                  <input type = "date" name = "start_date" class = "side_content_input">
+                  <h6 style = "margin: 0px;">就業最終日</h6>
+                  <input type = "date" name = "end_date" class = "side_content_input">
+                </div>
+              </div>
+              <div style = "width:100%;display:flex">
+                <div style = "width:75%;"></div>
+                <input type = "submit" value = "投稿" style = "width:13%;">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  
+<script>
+const inputText = document.getElementById('input_text');
+const button = document.getElementById('button');
+button.disabled = false;
+inputText.addEventListener('keyup',(e) => {
+  if(350 < e.target.value.length){
+    button.disabled = true;
+  }
+})
+</script>
