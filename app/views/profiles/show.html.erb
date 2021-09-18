@@ -68,7 +68,9 @@
               <img src = "<%= @profile.front_img%>" style = "width:100%;height:100%; border-radius: 50%;">
             </div>
               <p><%= @profile.user.name%></p>
-              <a class = "side_content js-modal-open" href = "" data-target = "modal-profile">編集</a>
+              <% if current_user.id == @profile.user_id%>
+                <a class = "side_content js-modal-open" href = "" data-target = "modal-profile">編集</a>
+              <% end %>
           </div>
           <div class = "text_inf" style = "display:flex;flex-flow: column;">
             <p>URL</p>

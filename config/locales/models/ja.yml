@@ -1,7 +1,0 @@
-ja:
- activerecord:
- models:
-  tweet: ツイート
- attributes:
-  tweet:
-    wordcount: 350

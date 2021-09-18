@@ -3,6 +3,6 @@ class Profile < ApplicationRecord
     mount_uploader :front_img, ImageUploader
     mount_uploader :back_img, ImageUploader
     
-    validates :front_img,presence: true
-    validates :back_img,presence: true
+    #validates :front_img,presence: true
+    #validates :back_img,presence: true
 end
