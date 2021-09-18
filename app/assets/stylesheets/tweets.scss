@@ -87,9 +87,6 @@ a{
 
 // 閉じるボタン
 .c-modal_close {
-    position: absolute;
-    top: 13px;
-    right: 10px;
 }
 
 .c-modal-tweet {
@@ -116,7 +113,7 @@ a{
     left: 50%;
     position: absolute;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -150%);
     border-radius: 5px;
 
     &._sm {
@@ -133,15 +130,12 @@ a{
 }
 
 .c-modal_content_inner-tweet {
-    position: relative;
     padding: 24px;
 }
 
 // 閉じるボタン
 .c-modal_close-tweet {
-    position: absolute;
-    top: 13px;
-    right: 10px;
+    
 }
 
 .action_contents{

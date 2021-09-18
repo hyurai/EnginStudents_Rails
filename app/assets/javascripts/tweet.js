@@ -1,4 +1,5 @@
 // ウィンドウを開く
+
 $(function(){    
     $( '.js-modal-open' ).each( function() {
       $( this ).on( 'click', function() {
