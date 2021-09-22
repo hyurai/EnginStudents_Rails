@@ -60,7 +60,7 @@
           <h2><%= tweet.title%></h2>
           <%= tweet.company_name%>
           <%= tweet.job%>
-          <% if tweet.job?%>
+          <% if tweet.company_name != nil%>
             <div class = "data_areas">
               <div>
                 <p>エントリー</p>

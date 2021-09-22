@@ -42,98 +42,99 @@
       </div>
    </div>
   </div>
-  <div class = "tweet_contents">
-    <div class = "tweet_content">
-      <div class = "top_date">
-        <div class = "img_areas">
-          <div class = "img_size">
-            <img class = "front_img" src = "<%= @tweet.tweet_profile(@tweet).front_img%>">
+    <div class = "tweet_contents">
+      <div class = "tweet_content">
+        <div class = "top_date">
+          <div class = "img_areas">
+            <div class = "img_size">
+              <img class = "front_img" src = "<%= @tweet.tweet_profile(@tweet).front_img%>">
+            </div>
           </div>
+          <p><%= @tweet.user.name%></p>
         </div>
-        <p><%= @tweet.user.name%></p>
-      </div>
-      <div class = "text_dates">
-        <div class = "null_area"></div>
-        <div class = "text_date">
-         <h2><%= @tweet.title%></h2>
-         <%= @tweet.company_name%>
-         <%= @tweet.job%>
-         <div class = "data_areas">
-           <div>
-             <p>エントリー</p>
-             <%= @tweet.entry_date%>
-           </div>
-           <div>
-             <p>開始</p>
-             <%= @tweet.start_date%>
-           </div>
-           <div>
-             <p>終わり</p>
-             <%= @tweet.end_date%>
-           </div>
-         </div>
-         <%= @tweet.text%>
-         <div class = "action_contents">
-           <div class = "action_content">
-            <a class = "side_content js-modal-open-comment" href = "" data-target = "modal-comment"><i class="fas fa-comments"></i></a>
-           </div>
-           <% if current_user.id == @tweet.user_id%>
-             <div class = "action_content">
-               <form action = "/tweet/<%= @tweet.id%>" method = "post">
-                <input type = "submit" value = "&#xf1f8;" class = "fas_style">
-               </form>
+        <div class = "text_dates">
+          <div class = "null_area"></div>
+          <div class = "text_date">
+           <h2><%= @tweet.title%></h2>
+           <%= @tweet.company_name%>
+           <%= @tweet.job%>
+           <% if @tweet.company_name != nil%>
+             <div class = "data_areas">
+               <div>
+                 <p>エントリー</p>
+                 <%= @tweet.entry_date%>
+               </div>
+               <div>
+                 <p>開始</p>
+                 <%= @tweet.start_date%>
+               </div>
+               <div>
+                 <p>終わり</p>
+                 <%= @tweet.end_date%>
+               </div>
              </div>
            <% end %>
-           <% if current_user.liked(@tweet)%>
-             <form action = "/likes/<%= current_user.liked(@tweet).id%>" method = "post">
-               <input type = "submit" value = "&#xf004;" class = "fas_style" style = "color: red;">
-             </form>
-           <% else %>
-             <form action = "/users/<%= current_user.id%>/likes" method = "post">
-               <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
-               <input type = "hidden" name = "tweet_id" value = "<%= @tweet.id%>">
-               <input type = "submit" value = "&#xf004;" class = "fas_style">
-             </form>
-           <% end %>
-         </div>
+           <%= @tweet.text%>
+           <div class = "action_contents">
+             <div class = "action_content">
+              <a class = "side_content js-modal-open-comment" href = "" data-target = "modal-comment"><i class="fas fa-comments"></i></a>
+             </div>
+             <% if current_user.id == @tweet.user_id%>
+               <div class = "action_content">
+                 <form action = "/tweet/<%= @tweet.id%>" method = "post">
+                  <input type = "submit" value = "&#xf1f8;" class = "fas_style">
+                 </form>
+               </div>
+             <% end %>
+             <% if current_user.liked(@tweet)%>
+               <form action = "/likes/<%= current_user.liked(@tweet).id%>" method = "post">
+                 <input type = "submit" value = "&#xf004;" class = "fas_style" style = "color: red;">
+               </form>
+             <% else %>
+               <form action = "/users/<%= current_user.id%>/likes" method = "post">
+                 <input type = "hidden" name = "user_id" value = "<%= current_user.id%>">
+                 <input type = "hidden" name = "tweet_id" value = "<%= @tweet.id%>">
+                 <input type = "submit" value = "&#xf004;" class = "fas_style">
+               </form>
+             <% end %>
+           </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class = "comment" style = "margin-right: 450px;margin-left: 100px;">
       <% @comments.each do |comment|%>
-        <div style = "border: solid;padding:15px;margin-top:10px;">
-          <div class = "top_date" style = "display:flex;width:100%;">
-            <div style = "width:10%;">
-              <div style = "width:50px;height:50px;">
-                <img style = "width:100%;height:100%;" src = "<%= comment.comment_profile(comment).front_img%>">
+        <div class = "tweet_content">
+          <div class = "top_date">
+            <div class = "img_areas">
+              <div class = "img_size">
+                <img class = "front_img" src = "<%= comment.comment_profile(comment).front_img%>">
               </div>
             </div>
-            <p><%= comment.user.name%></p>
+             <p><%= comment.user.name%></p>
           </div>
-          <div style = "width:100%;display:flex;">
-            <div style = "width:10%;"></div>
-            <div style = "width:90%;">
-              <%= comment.text%>
-              <div class = "action_contents">
-                <% if comment.user.id == current_user.id%>
-                  <div class = "action_content">
-                    <form action = "/tweets/<%= @tweet.id%>/comments/<%= comment.id%>" method = "post">
-                      <input type = "submit" value = "&#xf1f8;" class = "fas_style">
-                    </form>
-                  </div>
-                <% end %>
-                <div class = "action_content">
-                    
-                </div>
-              </div>
+          <div class = "text_dates">
+            <div class = "null_area">
             </div>
-            
+            <div class = "text_date">
+              <%= comment.text%>
+              <% if user_signed_in?%>
+                <div class = "action_contents">
+                  <% if current_user.id == comment.user_id%>
+                    <div class = "action_content">
+                      <form action = "" method = "POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type = "submit" value = "&#xf1f8;" class = "fas_style">
+                      </form>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
-       <% end %>
+      <% end%>
     </div>
-</div>
-</div>
+    
+
 <div>
 </div>
 
