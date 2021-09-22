@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     end
     
     def destroy
-        comment = Commnet.find(params[:id])
+        comment = Comment.find(params[:id])
         comment.destroy
         redirect_to '/tweets'
     end

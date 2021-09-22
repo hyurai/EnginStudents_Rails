@@ -120,8 +120,9 @@
                 <div class = "action_contents">
                   <% if current_user.id == comment.user_id%>
                     <div class = "action_content">
-                      <form action = "" method = "POST">
+                      <form action = "/tweets/<%= @tweet.id%>/comments/<%= comment.id%>" method = "POST">
                         <input type="hidden" name="_method" value="DELETE">
+                        <input type = "hidden" name = "commnet_id" value = "<%= comment.id%>">
                         <input type = "submit" value = "&#xf1f8;" class = "fas_style">
                       </form>
                     </div>
