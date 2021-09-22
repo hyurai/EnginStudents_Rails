@@ -60,20 +60,22 @@
           <h2><%= like.title%></h2>
           <%= like.company_name%>
           <%= like.job%>
-          <div class = "data_areas">
-            <div>
-              <p>エントリー</p>
-              <%= like.entry_date%>
+          <% if like.company_name != nil%>
+            <div class = "data_areas">
+              <div>
+                <p>エントリー</p>
+                <%= like.entry_date%>
+              </div>
+              <div>
+                <p>開始</p>
+                <%= like.start_date%>
+              </div>
+              <div>
+                <p>終わり</p>
+                <%= like.end_date%>
+              </div>
             </div>
-            <div>
-              <p>開始</p>
-              <%= like.start_date%>
-            </div>
-            <div>
-              <p>終わり</p>
-              <%= like.end_date%>
-            </div>
-         </div>
+          <% end %>
          <%= like.text%>
          <% if user_signed_in? %>
            <div class = "action_contents">
