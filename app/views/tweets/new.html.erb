@@ -87,8 +87,10 @@
      
     </div>
     </div>
+    
     <% @tweets.each do |tweet|%>
-      <div class = "tweet_content">
+      <% if tweet.company_name != nil%>
+        <div class = "tweet_content">
         <div class = "top_date">
           <div class = "img_areas">
             <div class = "img_size">
@@ -151,6 +153,7 @@
         </div>
       </div>
       </div>
+      <% end %>
     <% end %>
   </div>
 </div>
